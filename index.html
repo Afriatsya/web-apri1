@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Untuk Anita</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .container {
+      width: 90%;
+      max-width: 500px;
+      margin: 2rem 0;
+    }
+    .login, .main, .gallery, .letter {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      display: none;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .active {
+      display: block;
+    }
+    input {
+      margin: 1rem 0;
+      padding: 0.5rem;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #ff6f91;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background-color: #ff3f6e;
+    }
+    .typewriter {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid pink;
+      animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.5rem;
+      color: #d6336c;
+      margin-bottom: 1rem;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+    .section {
+      background-color: #fff0f5;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      text-align: left;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .gallery-grid img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    .love-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .love {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: fall 5s linear infinite;
+    }
+    .love::before, .love::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+    .love::before {
+      top: -10px;
+      left: 0;
+    }
+    .love::after {
+      top: 0;
+      left: -10px;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    audio {
+      display: none;
+    }
+    .stars {
+      background: url('https://www.transparenttextures.com/patterns/stardust.png');
+      background-color: #001f3f;
+      color: white;
+    }
+    #countdown {
+      font-size: 1.2rem;
+      color: #c2185b;
+      margin-bottom: 1rem;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="love-rain" id="loveRain"></div>
+  <audio autoplay loop id="bgMusic">
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container">
+    <div class="login active" id="loginPage">
+      <h2>Login Dulu</h2>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="login()">Masuk</button>
+    </div>
+
+    <div class="main" id="mainPage">
+      <img src="assets/WhatsApp Image 2025-05-08 at 21.13.17_3f1c09c9.jpg" alt="Foto Anita" style="width:100%; border-radius: 12px; margin-bottom:1rem;">
+      <div class="typewriter">Saya sayangki 💖</div>
+      <div id="countdown"></div>
+      <button onclick="tampilkanPesan()">Klik Disini</button>
+      <div class="section hidden" id="pesanSections">
+        <div class="section">
+          <h3>Cinta yang Tulus</h3>
+          <p>Sejak mengenalmu, hatiku tahu bahwa kamu adalah satu-satunya. Setiap senyummu, adalah cahaya untuk hariku.</p>
+        </div>
+        <div class="section">
+          <h3>Setiap Detik Berarti</h3>
+          <p>Aku ingin setiap detik bersamamu. Tak ada hal lain yang membuatku lebih bahagia dari melihatmu tersenyum.</p>
+        </div>
+        <div class="section">
+          <h3>Selamanya Bersamamu</h3>
+          <p>Jika ada satu hal yang ingin kuperjuangkan setiap hari, itu adalah cintamu. Kamu adalah rumah keduaku</p>
+        </div>
+        <button onclick="tampilkanGaleri()">Klik Lagi Lahh</button>
+        <button onclick="kembaliKeMain()">Kembali</button>
+      </div>
+    </div>
+
+    <div class="gallery stars" id="galleryPage">
+      <h2>Aprianita Nur Hikmah 📸</h2>
+      <div class="gallery-grid">
+        <img src="assets/WhatsApp Image 2025-05-08 at 21.13.16_39a767f7.jpg" alt="Anita 1">
+        <img src="assets/WhatsApp Image 2025-05-08 at 21.13.17_7af93503.jpg" alt="Anita 2">
+        <img src="assets/WhatsApp Image 2025-05-08 at 21.13.18_a6baabf6.jpg" alt="Anita 3">
+        <img src="assets/WhatsApp Image 2025-05-08 at 21.13.18_f657268a.jpg" alt="Anita 4">
+      </div>
+      <button onclick="tampilkanSurat()">Lanjut Baca Surat 💌</button>
+      <button onclick="kembaliKeMain()">Kembali</button>
+    </div>
+
+    <div class="letter" id="letterPage">
+      <h2>Surat Untukmu 🌹</h2>
+      <p style="text-align: left; line-height: 1.7;">
+        Kepada Anita, wanita paling indah dalam hidupku...<br><br>
+        Dari sekian banyak detik dalam hidupku, yang paling ku syukuri itu adalah detik ketika hadirki di hidupku. Hadirmu seperti angin yang menenangkan, seperti matahari yang menghangatkan. Saat kamu tersenyum, semua masalah dunia seakan tak penting.<br><br>
+        ku tahu mungkin tidak bisa ka selalu bisa sempurna. Tapi untuk msayangki, berjanji ka untuk selalu setia, selalu sabar, dan selalu belajar menjadi lebih baik. Karena kamu layak untuk itu.<br><br>
+        Jangan lupa bahwa kamu dicintai... setiap hari, setiap waktu. 💗<br><br>
+        Dari orang yang sayangki tanpa syarat,
+        <br><br><strong>Afriatsyah Nasra Perdana</strong>
+      </p>
+      <button onclick="kembaliKeGaleri()">Kembali</button>
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      if (user === 'aprianita' && pass === '12345') {
+        document.getElementById('loginPage').classList.remove('active');
+        document.getElementById('mainPage').classList.add('active');
+        playLoveRain();
+        startCountdown();
+      } else {
+        alert('Username atau password salah!');
+      }
+    }
+
+    function tampilkanPesan() {
+      document.getElementById('pesanSections').classList.remove('hidden');
+    }
+
+    function tampilkanGaleri() {
+      document.getElementById('mainPage').classList.remove('active');
+      document.getElementById('galleryPage').classList.add('active');
+    }
+
+    function tampilkanSurat() {
+      document.getElementById('galleryPage').classList.remove('active');
+      document.getElementById('letterPage').classList.add('active');
+    }
+
+    function kembaliKeMain() {
+      document.getElementById('galleryPage').classList.remove('active');
+      document.getElementById('letterPage').classList.remove('active');
+      document.getElementById('mainPage').classList.add('active');
+    }
+
+    function kembaliKeGaleri() {
+      document.getElementById('letterPage').classList.remove('active');
+      document.getElementById('galleryPage').classList.add('active');
+    }
+
+    function playLoveRain() {
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'love';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 5 + 3) + 's';
+        document.getElementById('loveRain').appendChild(heart);
+      }
+    }
+
+    function startCountdown() {
+      const targetDate = new Date('April 14, 2026 00:00:00').getTime();
+      const countdown = document.getElementById('countdown');
+
+      setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdown.innerHTML = `Menuju Hari Spesial: ${days}h ${hours}j ${minutes}m ${seconds}d`;
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
